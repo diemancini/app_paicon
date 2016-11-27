@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cadastro de Empresas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Nome</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Razão Social</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.razao_social"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>CNPJ</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.cnpj"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>CEP</ion-label>
+      <ion-input *ngIf="empresa" (blur)="onInputBlur($event, empresa)" type="number" [(ngModel)]="empresa.cep"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Logradouro</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.logradouro">{{empresa.logradouro}}</ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Complemento</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.complemento"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Bairro</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.bairro"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Localidade</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.localidade"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>UF</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.uf"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Unidade</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.unidade"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>IBGE</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.ibge"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>GIA</ion-label>
+      <ion-input *ngIf="empresa" type="text" [(ngModel)]="empresa.gia"></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+
+  <button block light (click)="alterarDadosEmpresa($event, empresa)">Salvar</button>
+
+</ion-content>
+
