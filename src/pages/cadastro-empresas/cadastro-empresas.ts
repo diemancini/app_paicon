@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { HTTP } from 'ionic-native';
-
+//import { LoadingController } from 'ionic-angular/index';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
-
+//import 'rxjs/Rx';
 
 @Component({
 	selector: 'cadastro-page',
@@ -10,14 +11,32 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 
 export class CadastroEmpresasPage {
+	//public loadingCtrl: LoadingController;
+	dadosForm: any;
 	empresa: any;
 	cadastro: boolean;
 	lista = [];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public builder: FormBuilder) {
 		this.empresa = navParams.get('empresa');
 		this.cadastro = navParams.get('cadastro');
 		this.lista = navParams.get('lista');
+
+		
+		this.dadosForm = builder.group({
+			"nome": ["", Validators.required], 
+			"razao_social": ["", Validators.required],
+			"cnpj": ["", Validators.compose([Validators.required, Validators.pattern("([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})")])],
+			"cep": ["",Validators.compose([Validators.required, Validators.pattern('([0-9]{8})')])],
+			"logradouro": "",
+			"complemento": "",
+			"bairro": "",
+			"localidade": "",
+			"uf": "",
+			"unidade": "",
+			"ibge": "",
+			"gia": ""
+		})
 	}
 
 	private atualizarDadosEmpresa(dadosEmpresa) {
@@ -40,7 +59,7 @@ export class CadastroEmpresasPage {
 		}
 	}
 
-	salvar(event, dadosEmpresa) {
+	salvar(dadosEmpresa) {
 
 		if (this.cadastro) {
 			let n = this.lista.length;
@@ -58,6 +77,12 @@ export class CadastroEmpresasPage {
     onInputBlur(event, dadosEmpresa) {
         let url = 'https://viacep.com.br/ws/'+ dadosEmpresa.cep +'/json/unicode/';
 
+        /*let loadingPopup = this.loadingCtrl.create({
+	    	content: 'Buscando CEP ...'
+	    });
+
+        loadingPopup.present();*/
+
         HTTP.get(url, {}, {})
 			.then(data => {
 				if (data.status == 200) {
@@ -73,12 +98,14 @@ export class CadastroEmpresasPage {
 					this.empresa.ibge = response.ibge;
 				}
 
+				//loadingPopup.dismiss();
 			})
 			.catch(error => {
 				console.log("Error:"+ error.status);
 				console.log("Error:"+ error.error); 
 				console.log("Error:"+ error.headers);
 
+				//loadingPopup.dismiss();
 			});
     }
 }
