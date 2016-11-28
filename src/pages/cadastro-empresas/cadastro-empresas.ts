@@ -50,7 +50,7 @@ export class CadastroEmpresasPage {
 		
 		for (let i = 0; i < this.lista.length; i++) {
 			if (this.lista[i].id === this.empresa.id) {
-				alert("nome alterado para:"+ dadosEmpresa.nome);
+				//alert("nome alterado para:"+ dadosEmpresa.nome);
 				this.lista[i].nome = dadosEmpresa.nome;
 				this.lista[i].cnpj = dadosEmpresa.cnpj;
 				this.lista[i].razao_social = dadosEmpresa.razao_social;
@@ -69,7 +69,7 @@ export class CadastroEmpresasPage {
 
 	// Atualiza os campos de uma empresa existente ou salva uma nova empresa cadastrada.
 	salvar(dadosEmpresa) {
-		let mensagem = "";
+		//let mensagem = "";
 
 		if (this.cadastro) {
 			let n = this.lista.length;
@@ -81,7 +81,7 @@ export class CadastroEmpresasPage {
 		}
 		else {
 			this.atualizarDadosEmpresa(dadosEmpresa);
-			//mensagem = "Os dados da empresa foram alterados com sucesso!";
+			//cmensagem = "Os dados da empresa foram alterados com sucesso!";
 		}
 		
 		/*Toast.show(mensagem, '3000', 'bottom').subscribe(
