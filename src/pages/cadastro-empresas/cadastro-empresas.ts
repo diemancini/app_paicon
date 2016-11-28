@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { HTTP } from 'ionic-native';
+import { HTTP, Toast } from 'ionic-native';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 
 @Component({
@@ -10,12 +11,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 
 export class CadastroEmpresasPage {
+	loader: any;
 	dadosForm: any;
 	empresa: any;
 	cadastro: boolean;
 	lista = [];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public builder: FormBuilder) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public builder: FormBuilder, public loadingCtrl: LoadingController) {
 		this.empresa = navParams.get('empresa');
 		this.cadastro = navParams.get('cadastro');
 		this.lista = navParams.get('lista');
@@ -34,7 +36,13 @@ export class CadastroEmpresasPage {
 			"unidade": "",
 			"ibge": "",
 			"gia": ""
-		})
+		});
+
+		// Usado para o popup da busca do cep.
+		this.loader = this.loadingCtrl.create({
+        	content: "Buscando CEP ...",
+        	duration: 5000
+        });
 	}
 
 	// Atualiza os dados da tela de edição de empresas.
@@ -60,23 +68,34 @@ export class CadastroEmpresasPage {
 
 	// Atualiza os campos de uma empresa existente ou salva uma nova empresa cadastrada.
 	salvar(dadosEmpresa) {
+		let mensagem = "";
 
 		if (this.cadastro) {
 			let n = this.lista.length;
 			let id = this.lista[n-1].id;
 			dadosEmpresa.id = id+1;
+			mensagem = "A empresa foi cadastrada com sucesso!";
+
 			this.lista.push(dadosEmpresa);
 		}
 		else {
 			this.atualizarDadosEmpresa(dadosEmpresa);
+			mensagem = "Os dados da empresa foram alterados com sucesso!";
 		}
 		
+		Toast.show(mensagem, '3000', 'bottom').subscribe(
+			toast => {
+				console.log(toast);
+			}
+		);
 		this.navCtrl.pop();
     }
 
     // Essa função busca um cep válido no site "viaCep" e preenche os campos de logradouro, bairro, etc...
     onInputBlur(event, dadosEmpresa) {
         let url = 'https://viacep.com.br/ws/'+ dadosEmpresa.cep +'/json/unicode/';
+
+        this.loader.present();
 
         HTTP.get(url, {}, {})
 			.then(data => {
@@ -93,12 +112,14 @@ export class CadastroEmpresasPage {
 					this.empresa.ibge = response.ibge;
 				}
 
+				this.loader.dismiss();
 			})
 			.catch(error => {
 				console.log("Error:"+ error.status);
 				console.log("Error:"+ error.error); 
 				console.log("Error:"+ error.headers);
-
+				
+				this.loader.dismiss();
 			});
     }
 }

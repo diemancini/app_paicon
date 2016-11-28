@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { CadastroEmpresasPage } from '../pages/cadastro-empresas/cadastro-empresas';
 import { ListaEmpresasPage } from '../pages/lista-empresas/lista-empresas';
+import { LoadingController } from 'ionic-angular';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,6 @@ import { ListaEmpresasPage } from '../pages/lista-empresas/lista-empresas';
     CadastroEmpresasPage,
     ListaEmpresasPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, LoadingController]
 })
 export class AppModule {}
