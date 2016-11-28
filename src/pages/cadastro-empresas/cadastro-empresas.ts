@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { HTTP } from 'ionic-native';
-//import { LoadingController } from 'ionic-angular/index';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
-//import 'rxjs/Rx';
+
 
 @Component({
 	selector: 'cadastro-page',
@@ -11,7 +10,6 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 
 export class CadastroEmpresasPage {
-	//public loadingCtrl: LoadingController;
 	dadosForm: any;
 	empresa: any;
 	cadastro: boolean;
@@ -22,7 +20,7 @@ export class CadastroEmpresasPage {
 		this.cadastro = navParams.get('cadastro');
 		this.lista = navParams.get('lista');
 
-		
+		// Valida os dados inseridos.
 		this.dadosForm = builder.group({
 			"nome": ["", Validators.required], 
 			"razao_social": ["", Validators.required],
@@ -39,6 +37,7 @@ export class CadastroEmpresasPage {
 		})
 	}
 
+	// Atualiza os dados da tela de edição de empresas.
 	private atualizarDadosEmpresa(dadosEmpresa) {
 		for (let i = 0; i < this.lista.length; i++) {
 			if (this.lista[i].id === dadosEmpresa.id) {
@@ -59,6 +58,7 @@ export class CadastroEmpresasPage {
 		}
 	}
 
+	// Atualiza os campos de uma empresa existente ou salva uma nova empresa cadastrada.
 	salvar(dadosEmpresa) {
 
 		if (this.cadastro) {
@@ -74,14 +74,9 @@ export class CadastroEmpresasPage {
 		this.navCtrl.pop();
     }
 
+    // Essa função busca um cep válido no site "viaCep" e preenche os campos de logradouro, bairro, etc...
     onInputBlur(event, dadosEmpresa) {
         let url = 'https://viacep.com.br/ws/'+ dadosEmpresa.cep +'/json/unicode/';
-
-        /*let loadingPopup = this.loadingCtrl.create({
-	    	content: 'Buscando CEP ...'
-	    });
-
-        loadingPopup.present();*/
 
         HTTP.get(url, {}, {})
 			.then(data => {
@@ -98,14 +93,12 @@ export class CadastroEmpresasPage {
 					this.empresa.ibge = response.ibge;
 				}
 
-				//loadingPopup.dismiss();
 			})
 			.catch(error => {
 				console.log("Error:"+ error.status);
 				console.log("Error:"+ error.error); 
 				console.log("Error:"+ error.headers);
 
-				//loadingPopup.dismiss();
 			});
     }
 }

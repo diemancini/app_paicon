@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { NavController, NavParams } from 'ionic-angular';
-
 import { CadastroEmpresasPage } from '../cadastro-empresas/cadastro-empresas';
 
 
@@ -46,6 +44,7 @@ export class ListaEmpresasPage {
         }
     }
 
+    // Preenche os campos de uma empresa já cadastrada.
     editarDadosEmpresa(event, item) {
         this.empresa.id = item.id;
         this.empresa.nome = item.nome;
@@ -64,6 +63,7 @@ export class ListaEmpresasPage {
         this.navCtrl.push(CadastroEmpresasPage, { empresa: this.empresa, lista: this.lista, cadastro: false });
     }
 
+    // Preenche os campos de uma nova empresa.
     cadastrarEmpresa(event) {
         let empresa  = {
             nome: "",
