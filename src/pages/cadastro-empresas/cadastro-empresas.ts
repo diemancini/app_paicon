@@ -47,9 +47,10 @@ export class CadastroEmpresasPage {
 
 	// Atualiza os dados da tela de edição de empresas.
 	private atualizarDadosEmpresa(dadosEmpresa) {
+		
 		for (let i = 0; i < this.lista.length; i++) {
-			if (this.lista[i].id === dadosEmpresa.id) {
-
+			if (this.lista[i].id === this.empresa.id) {
+				alert("nome alterado para:"+ dadosEmpresa.nome);
 				this.lista[i].nome = dadosEmpresa.nome;
 				this.lista[i].cnpj = dadosEmpresa.cnpj;
 				this.lista[i].razao_social = dadosEmpresa.razao_social;
@@ -74,20 +75,20 @@ export class CadastroEmpresasPage {
 			let n = this.lista.length;
 			let id = this.lista[n-1].id;
 			dadosEmpresa.id = id+1;
-			mensagem = "A empresa foi cadastrada com sucesso!";
+			//mensagem = "A empresa foi cadastrada com sucesso!";
 
 			this.lista.push(dadosEmpresa);
 		}
 		else {
 			this.atualizarDadosEmpresa(dadosEmpresa);
-			mensagem = "Os dados da empresa foram alterados com sucesso!";
+			//mensagem = "Os dados da empresa foram alterados com sucesso!";
 		}
 		
-		Toast.show(mensagem, '3000', 'bottom').subscribe(
+		/*Toast.show(mensagem, '3000', 'bottom').subscribe(
 			toast => {
 				console.log(toast);
 			}
-		);
+		);*/
 		this.navCtrl.pop();
     }
 
