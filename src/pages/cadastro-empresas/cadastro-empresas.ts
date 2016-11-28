@@ -22,14 +22,58 @@ export class CadastroEmpresasPage {
 		//alert("empresa: "+ this.empresa.nome);
 	}
 
-	alterarDadosEmpresa(event, dadosEmpresa) {
-		//alert("Nome da empresa: "+ dadosEmpresa.nome);
-		alert("cadastro: "+ this.cadastro);
+	private atualizarDadosEmpresa(dadosEmpresa) {
+		//let n = this.lista.length;
+		for (let i = 0; i < this.lista.length; i++) {
+			if (this.lista[i].id === dadosEmpresa.id) {
+
+				this.lista[i].nome = dadosEmpresa.nome;
+				this.lista[i].cnpj = dadosEmpresa.cnpj;
+				this.lista[i].razao_social = dadosEmpresa.razao_social;
+				this.lista[i].cep = dadosEmpresa.cep;
+				this.lista[i].logradouro = dadosEmpresa.logradouro;
+				this.lista[i].complemento = dadosEmpresa.complemento;
+				this.lista[i].bairro = dadosEmpresa.bairro;
+				this.lista[i].localidade = dadosEmpresa.localidade;
+				this.lista[i].uf = dadosEmpresa.uf;
+				this.lista[i].unidade = dadosEmpresa.unidade;
+				this.lista[i].ibge = dadosEmpresa.ibge;
+				this.lista[i].gia = dadosEmpresa.gia;
+			}
+		}
+		return -1;
+	}
+
+	salvar(event, dadosEmpresa) {
+		//alert("Nome da empresa: "+ dadosEmpresa.nome +" id: "+ dadosEmpresa.id);
+		//alert("cadastro: "+ this.cadastro);
 
 		if (this.cadastro) {
-			console.log("É para adicionar essa empresa à lista");
+			//console.log("É para adicionar essa empresa à lista");
+			let n = this.lista.length;
+			let id = this.lista[n-1].id;
+			dadosEmpresa.id = id+1;
 			this.lista.push(dadosEmpresa);
-			//this.empresa.add(dadosEmpresa);
+		}
+		else {
+			this.atualizarDadosEmpresa(dadosEmpresa);
+			/*console.log("id: "+ id);
+			id--;
+			if (id > -1) {
+				this.lista[id].nome = dadosEmpresa.nome;
+				this.lista[id].cnpj = dadosEmpresa.cnpj;
+				this.lista[id].razao_social = dadosEmpresa.razao_social;
+				this.lista[id].cep = dadosEmpresa.cep;
+				this.lista[id].logradouro = dadosEmpresa.logradouro;
+				this.lista[id].complemento = dadosEmpresa.complemento;
+				this.lista[id].bairro = dadosEmpresa.bairro;
+				this.lista[id].localidade = dadosEmpresa.localidade;
+				this.lista[id].uf = dadosEmpresa.uf;
+				this.lista[id].unidade = dadosEmpresa.unidade;
+				this.lista[id].ibge = dadosEmpresa.ibge;
+				this.lista[id].gia = dadosEmpresa.gia;
+			}*/
+
 		}
 		
 		this.navCtrl.pop();
@@ -44,7 +88,7 @@ export class CadastroEmpresasPage {
 
 				if (data.status == 200) {
 	  				let response = JSON.parse(data.data);
-	  				//console.log("data.data.logradouro"+ response.logradouro);
+
 					this.empresa.logradouro  = response.logradouro;
 					this.empresa.localidade  = response.localidade;
 					this.empresa.complemento = response.complemento;
@@ -53,10 +97,6 @@ export class CadastroEmpresasPage {
 					this.empresa.uf   = response.uf;
 					this.empresa.gia  = response.gia;
 					this.empresa.ibge = response.ibge;
-					//console.log("this.empresa.logradouro"+ this.empresa.logradouro);
-					//console.log(data.status);
-					//console.log(data.data); // data received by server
-					//console.log(data.headers);
 				}
 
 			})
