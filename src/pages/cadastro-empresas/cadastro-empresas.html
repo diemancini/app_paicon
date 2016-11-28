@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Cadastro de Empresas</ion-title>
   </ion-navbar>
 </ion-header>
@@ -70,7 +70,9 @@
 
   </ion-list>
 
-  <button ion-button color="secondary" round (click)="salvar($event, empresa)">Salvar</button>
+  <div item-right>
+    <button ion-button color="danger" round (click)="salvar($event, empresa)">Salvar</button>
+  </div>  
 
 </ion-content>
 

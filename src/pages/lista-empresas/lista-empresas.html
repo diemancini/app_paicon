@@ -1,8 +1,5 @@
 <ion-header>
-    <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
+    <ion-navbar color="primary">
         <ion-title>Lista de Empresas</ion-title>
     </ion-navbar>
 </ion-header>
@@ -20,10 +17,10 @@
         </button>
     </ion-list>
 
-    <ion-item bottom>
-        <button ion-fab item-right bottom default color="danger" (click)="cadastrarEmpresa($event)">
+   <ion-fab right bottom>
+        <button ion-fab color="danger" (click)="cadastrarEmpresa($event)">
             <ion-icon name="add"></ion-icon>
         </button>
-    </ion-item>
+    </ion-fab>
 
 </ion-content>

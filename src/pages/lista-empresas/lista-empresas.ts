@@ -4,8 +4,6 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { CadastroEmpresasPage } from '../cadastro-empresas/cadastro-empresas';
 
-//import { DAOPage } from '../../DAO/DAO';
-
 
 @Component({
     selector: 'list-page',
@@ -81,18 +79,6 @@ export class ListaEmpresasPage {
             ibge: "",
             gia: ""
         };
-        /*this.empresa.nome = "";
-        this.empresa.cnpj = "";
-        this.empresa.razao_social = "";
-        this.empresa.cep = "";
-        this.empresa.logradouro = "";
-        this.empresa.complemento = "";
-        this.empresa.bairro = "";
-        this.empresa.localidade = "";
-        this.empresa.uf = "";
-        this.empresa.unidade = "";
-        this.empresa.ibge = "";
-        this.empresa.gia = "";*/
 
         this.navCtrl.push(CadastroEmpresasPage, { empresa: empresa, lista: this.lista, cadastro: true });
     }
