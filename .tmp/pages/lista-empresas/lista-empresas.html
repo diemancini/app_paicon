@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Lista de Empresas</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list no-lines>
+        <button ion-item *ngFor="let item of lista" (click)="editarDadosEmpresa($event, item)">
+            <div item-left>
+                {{item.nome}}
+            </div>
+            <div item-right>
+                {{item.id}}
+            </div>
+        </button>
+    </ion-list>
+
+   <ion-fab right bottom>
+        <button ion-fab color="danger" (click)="cadastrarEmpresa($event)">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
+</ion-content>

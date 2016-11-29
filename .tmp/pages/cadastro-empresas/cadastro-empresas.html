@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Cadastro de Empresas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+
+        <form [formGroup]="dadosForm" (ngSubmit)="salvar(dadosForm.value)">
+            <ion-item>
+                <ion-label stacked>Nome</ion-label>
+                <ion-input type="text" formControlName="nome" *ngIf="empresa" [(ngModel)]="empresa.nome"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Razão Social</ion-label>
+                <ion-input type="text" formControlName="razao_social" *ngIf="empresa" [(ngModel)]="empresa.razao_social"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>CNPJ</ion-label>
+                <ion-input type="text" formControlName="cnpj" *ngIf="empresa" [(ngModel)]="empresa.cnpj"></ion-input>
+            </ion-item>
+            <div [hidden]="dadosForm.controls.cnpj.valid || (dadosForm.controls.cnpj.pristine && !dadosForm.controls.cnpj.touched)" class="validation-message" padding-left>Não é um cnpj válido!</div>
+
+            <ion-item>
+                <ion-label stacked>CEP</ion-label>
+                <ion-input (blur)="onInputBlur($event, empresa)" type="number" formControlName="cep" *ngIf="empresa" [(ngModel)]="empresa.cep"></ion-input>
+            </ion-item>
+            <div [hidden]="dadosForm.controls.cep.valid || (dadosForm.controls.cep.pristine && !dadosForm.controls.cep.touched)" class="validation-message" padding-left>O cep deve conter semente 8 digitos!</div>
+
+            <ion-item>
+                <ion-label stacked>Logradouro</ion-label>
+                <ion-input type="text" formControlName="logradouro" *ngIf="empresa" [(ngModel)]="empresa.logradouro"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Complemento</ion-label>
+                <ion-input type="text" formControlName="complemento" *ngIf="empresa" [(ngModel)]="empresa.complemento"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Bairro</ion-label>
+                <ion-input type="text" formControlName="bairro" *ngIf="empresa" [(ngModel)]="empresa.bairro"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Localidade</ion-label>
+                <ion-input type="text" formControlName="localidade" *ngIf="empresa" [(ngModel)]="empresa.localidade"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>UF</ion-label>
+                <ion-input type="text" formControlName="uf" *ngIf="empresa" [(ngModel)]="empresa.uf"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Unidade</ion-label>
+                <ion-input type="text" formControlName="unidade" *ngIf="empresa" [(ngModel)]="empresa.unidade"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>IBGE</ion-label>
+                <ion-input type="text" formControlName="ibge" *ngIf="empresa" [(ngModel)]="empresa.ibge"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>GIA</ion-label>
+                <ion-input type="text" formControlName="gia" *ngIf="empresa" [(ngModel)]="empresa.gia"></ion-input>
+            </ion-item>
+
+            <div item-right>
+                <button ion-button type="submit" color="danger" round [disabled]="!dadosForm.valid">Salvar</button>
+            </div>  
+        </form>
+
+    </ion-list>
+
+</ion-content>
+
