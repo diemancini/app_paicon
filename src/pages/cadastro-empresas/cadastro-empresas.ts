@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HTTP, Toast } from 'ionic-native';
+import { HTTP } from 'ionic-native';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
@@ -69,26 +69,18 @@ export class CadastroEmpresasPage {
 
 	// Atualiza os campos de uma empresa existente ou salva uma nova empresa cadastrada.
 	salvar(dadosEmpresa) {
-		//let mensagem = "";
 
 		if (this.cadastro) {
 			let n = this.lista.length;
 			let id = this.lista[n-1].id;
 			dadosEmpresa.id = id+1;
-			//mensagem = "A empresa foi cadastrada com sucesso!";
 
 			this.lista.push(dadosEmpresa);
 		}
 		else {
 			this.atualizarDadosEmpresa(dadosEmpresa);
-			//cmensagem = "Os dados da empresa foram alterados com sucesso!";
 		}
 		
-		/*Toast.show(mensagem, '3000', 'bottom').subscribe(
-			toast => {
-				console.log(toast);
-			}
-		);*/
 		this.navCtrl.pop();
     }
 
